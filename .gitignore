@@ -51,3 +51,38 @@ yarn-error.log*
 /.idea/dataSources.xml
 /.idea/db-forest-config.xml
 /.idea/dataSources/data_sources_history.xml
+
+# Java
+target/
+*.class
+*.jar
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+
+# Environment
+.env
+.env.*
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
