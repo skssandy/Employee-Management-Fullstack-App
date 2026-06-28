@@ -1,0 +1,65 @@
+{
+  "family": "employeehub-dev-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "__EXECUTION_ROLE_ARN__",
+  "taskRoleArn": "__TASK_ROLE_ARN__",
+
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "__BACKEND_IMAGE__",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:mysql://__RDS_ENDPOINT__/employeehub"
+        },
+        {
+          "name": "SPRING_DATASOURCE_USERNAME",
+          "value": "__DB_USERNAME__"
+        },
+        {
+          "name": "SPRING_DATASOURCE_PASSWORD",
+          "value": "__DB_PASSWORD__"
+        },
+        {
+          "name": "SPRING_JPA_HIBERNATE_DDL_AUTO",
+          "value": "update"
+        }
+      ],
+
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/employeehub-dev-backend",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:8080/actuator/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

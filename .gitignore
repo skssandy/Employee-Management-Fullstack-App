@@ -86,3 +86,8 @@ terraform.tfvars
 
 # Maven
 .mvn/wrapper/maven-wrapper.jar
+
+deployment/.image_tag
+deployment/.backend_task_arn
+deployment/.frontend_task_arn
+deployment/*-final.json
