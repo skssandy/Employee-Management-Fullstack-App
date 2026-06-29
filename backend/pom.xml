@@ -242,7 +242,7 @@
         <configuration>
           <source>11</source>
           <target>11</target>
-          <fork>true</fork>
+          <fork>fasle</fork>
           <compilerArgs>
             <arg>-parameters</arg>
           </compilerArgs>
