@@ -24,6 +24,9 @@ export IMAGE_TAG=${GIT_SHA}
 echo "Git Commit : ${GIT_SHA}"
 echo "Image Tag  : ${IMAGE_TAG}"
 
+BACKEND_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_ECR}"
+FRONTEND_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_ECR}"
+
 ###############################################################################
 # Build Backend Image
 ###############################################################################
@@ -32,8 +35,8 @@ echo ""
 echo "Building Backend Docker Image..."
 
 docker build \
-    -t ${BACKEND_ECR}:${IMAGE_TAG} \
-    -t ${BACKEND_ECR}:latest \
+    -t ${BACKEND_REPOSITORY}:${IMAGE_TAG} \
+    -t ${BACKEND_REPOSITORY}:latest \
     ./backend
 
 echo "Backend image built successfully."
@@ -46,8 +49,8 @@ echo ""
 echo "Building Frontend Docker Image..."
 
 docker build \
-    -t ${FRONTEND_ECR}:${IMAGE_TAG} \
-    -t ${FRONTEND_ECR}:latest \
+    -t ${FRONTEND_REPOSITORY}:${IMAGE_TAG} \
+    -t ${FRONTEND_REPOSITORY}:latest \
     ./frontend
 
 echo "Frontend image built successfully."
