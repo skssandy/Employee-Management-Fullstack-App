@@ -7,7 +7,7 @@
 # Author  : Santhosh Kumar
 ###############################################################################
 
-set -e
+set -euo pipefail
 
 echo "========================================================"
 echo "     Registering ECS Task Definitions"
@@ -61,8 +61,8 @@ map(
     end
 )
 ' \
-/tmp/backend-task-definition.json \
-> /tmp/backend-task-definition-final.json
+cp deployment/backend-task-definition.json \
+   /tmp/backend-task-definition.json
 
 ###############################################################################
 # Generate Frontend Task Definition
@@ -80,8 +80,8 @@ jq \
 .taskRoleArn      = $TASK_ROLE |
 .containerDefinitions[0].image = $IMAGE
 ' \
-/tmp/frontend-task-definition.json \
-> /tmp/frontend-task-definition-final.json
+cp deployment/frontend-task-definition.json \
+   /tmp/frontend-task-definition.json
 
 ###############################################################################
 # Register Backend Task
@@ -92,12 +92,12 @@ echo "Registering Backend Task..."
 
 BACKEND_TASK_ARN=$(
 aws ecs register-task-definition \
-    --cli-input-json file://tmp/backend-task-definition-final.json \
+    --cli-input-json file:///tmp/backend-task-definition-final.json \
     --query 'taskDefinition.taskDefinitionArn' \
     --output text
 )
 
-echo "$BACKEND_TASK_ARN" > deployment/.backend_task_arn
+echo "$BACKEND_TASK_ARN" > /tmp/.backend_task_arn
 
 echo "Backend Task Registered"
 
@@ -110,12 +110,12 @@ echo "Registering Frontend Task..."
 
 FRONTEND_TASK_ARN=$(
 aws ecs register-task-definition \
-    --cli-input-json file://tmp/frontend-task-definition-final.json \
+    --cli-input-json file:///tmp/frontend-task-definition-final.json \
     --query 'taskDefinition.taskDefinitionArn' \
     --output text
 )
 
-echo "$FRONTEND_TASK_ARN" > deployment/.frontend_task_arn
+echo "$FRONTEND_TASK_ARN" > /tmp/.frontend_task_arn
 
 echo "Frontend Task Registered"
 
