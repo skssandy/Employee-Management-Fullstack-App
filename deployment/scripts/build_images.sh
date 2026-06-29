@@ -32,8 +32,8 @@ echo ""
 echo "Building Backend Docker Image..."
 
 docker build \
-    -t ${BACKEND_REPOSITORY}:${IMAGE_TAG} \
-    -t ${BACKEND_REPOSITORY}:latest \
+    -t ${BACKEND_ECR}:${IMAGE_TAG} \
+    -t ${BACKEND_ECR}:latest \
     ./backend
 
 echo "Backend image built successfully."
@@ -46,8 +46,8 @@ echo ""
 echo "Building Frontend Docker Image..."
 
 docker build \
-    -t ${FRONTEND_REPOSITORY}:${IMAGE_TAG} \
-    -t ${FRONTEND_REPOSITORY}:latest \
+    -t ${FRONTEND_ECR}:${IMAGE_TAG} \
+    -t ${FRONTEND_ECR}:latest \
     ./frontend
 
 echo "Frontend image built successfully."
