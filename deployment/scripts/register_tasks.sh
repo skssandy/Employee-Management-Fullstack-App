@@ -61,7 +61,7 @@ map(
     end
 )
 ' \
-cp deployment/backend-task-definition.json \
+    deployment/backend-task-definition.json \
    /tmp/backend-task-definition.json
 
 ###############################################################################
@@ -80,7 +80,7 @@ jq \
 .taskRoleArn      = $TASK_ROLE |
 .containerDefinitions[0].image = $IMAGE
 ' \
-cp deployment/frontend-task-definition.json \
+    deployment/frontend-task-definition.json \
    /tmp/frontend-task-definition.json
 
 ###############################################################################
