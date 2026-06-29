@@ -46,9 +46,7 @@ jq \
 '
 .executionRoleArn = $EXEC_ROLE |
 .taskRoleArn      = $TASK_ROLE |
-
 .containerDefinitions[0].image = $IMAGE |
-
 .containerDefinitions[0].environment |=
 map(
     if .name=="SPRING_DATASOURCE_URL"
@@ -62,7 +60,7 @@ map(
 )
 ' \
     deployment/backend-task-definition.json \
-   /tmp/backend-task-definition.json
+> /tmp/backend-task-definition-final.json
 
 ###############################################################################
 # Generate Frontend Task Definition
@@ -81,7 +79,7 @@ jq \
 .containerDefinitions[0].image = $IMAGE
 ' \
     deployment/frontend-task-definition.json \
-   /tmp/frontend-task-definition.json
+> /tmp/frontend-task-definition-final.json
 
 ###############################################################################
 # Register Backend Task
