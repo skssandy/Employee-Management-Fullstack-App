@@ -36,6 +36,9 @@ FRONTEND_IMAGE="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND
 echo ""
 echo "Generating Backend Task Definition..."
 
+echo ""
+echo "Generating Backend Task Definition..."
+
 jq \
 --arg IMAGE "$BACKEND_IMAGE" \
 --arg EXEC_ROLE "$EXECUTION_ROLE_ARN" \
