@@ -17,8 +17,8 @@ echo "========================================================"
 # Read Task Definition ARNs
 ###############################################################################
 
-BACKEND_TASK_ARN=$(cat deployment/.backend_task_arn)
-FRONTEND_TASK_ARN=$(cat deployment/.frontend_task_arn)
+BACKEND_TASK_ARN=$(cat /tmp/.backend_task_arn)
+FRONTEND_TASK_ARN=$(cat /tmp/.frontend_task_arn)
 
 echo ""
 echo "Backend Task Definition"
