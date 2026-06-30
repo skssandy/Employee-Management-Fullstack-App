@@ -36,9 +36,6 @@ FRONTEND_IMAGE="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND
 echo ""
 echo "Generating Backend Task Definition..."
 
-echo ""
-echo "Generating Backend Task Definition..."
-
 jq \
 --arg IMAGE "$BACKEND_IMAGE" \
 --arg EXEC_ROLE "$EXECUTION_ROLE_ARN" \
@@ -63,7 +60,7 @@ map(
 )
 ' \
     deployment/backend-task-definition.json \
-> /tmp/backend-task-definition-final.json
+    > /tmp/backend-task-definition-final.json
 
 ###############################################################################
 # Generate Frontend Task Definition
@@ -82,7 +79,7 @@ jq \
 .containerDefinitions[0].image = $IMAGE
 ' \
     deployment/frontend-task-definition.json \
-> /tmp/frontend-task-definition-final.json
+    > /tmp/frontend-task-definition-final.json
 
 ###############################################################################
 # Register Backend Task
